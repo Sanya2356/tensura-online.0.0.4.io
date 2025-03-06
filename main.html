@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="player.css">
+</head>
+<body>
+
+    <!-- Экран загрузки -->
+    <div id="loading-screen">
+        <span class="loading-text">Загрузка...</span>
+    </div>
+
+    <!-- Основной контент -->
+    <div id="main-content" style="display: none;"> 
+        <div class="avatar-block">
+            <button class="framed-button">
+                <img src="img/avatar_one.png" alt="Картинка">
+            </button>
+        </div>
+
+        <!-- Контейнер для персонажа -->
+        <div id="player-container">
+            <div id="player">
+                <img src="img/startchar.png" alt="Персонаж">
+                <div id="nickname">Игрок</div>
+            </div>
+        </div>
+
+        <!-- Новый контейнер для статик никнейма -->
+        <div id="static-nickname-container">
+            <div id="static-nickname">Игрок</div>
+            <div id="static-level">Уровень: </div>
+            <div id="static-power">БМ: </div>
+            <div id="static-experience">Опыт: </div>
+        </div>
+
+
+       
+        <!-- Нижняя панель управления -->
+        <div class="bottom-menu">
+            <button class="menu-button">Строй</button>
+            <button class="menu-button">Герои</button>
+            <button class="menu-button">Битва</button>
+            <button class="menu-button">События</button>
+            <button class="menu-button">Экиперовка</button>
+        </div>
+    </div>
+
+    <!-- Подключаем player.js перед основным скриптом -->
+    <script src="player.js"></script>
+    <script>
+        // Загружаем данные игрока при старте
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("#player #nickname").textContent = player.nickname;
+            document.getElementById("static-nickname").textContent = player.nickname;
+            document.getElementById("static-level").textContent = `Уровень: ${player.level}`;
+            document.getElementById("static-power").textContent = `БМ: ${player.power}`;
+            document.getElementById("static-experience").textContent = `Опыт: ${player.experience}/100`;
+        });
+
+        // Показываем загрузку и через 3 секунды переключаем на контент
+        setTimeout(() => {
+            document.getElementById("loading-screen").style.display = "none";
+            document.getElementById("main-content").style.display = "flex";
+        }, 3000);
+    </script>
+
+    <script src="character.js"></script>
+    <script src="display.js"></script>
+    <script src="stroy.js"></script>
+</body>
+</html>
